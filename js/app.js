@@ -44,6 +44,7 @@ $('#sleepiness').text(`My sleepiness is ${pet.sleepiness} out of 10`);
 $('#boredom').text(`My boredom is ${pet.boredom} out of 10`);
 
 // Add buttons to the screen to feed your pet, turn off the lights, and play with your pet.
+
 // Add the ability to name your pet.
 // Style the page.
 // Increase your pet's age every x minutes
