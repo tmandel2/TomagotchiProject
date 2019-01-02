@@ -5,8 +5,29 @@
 // Requirements
 // Create a repo for your tomagotchi pet
 // make a commit after you finish each one of the following
+
+
+
+
 // Create a Class (JS Class, look at your notes if your forget) for your tomagotchi
+class tomagotchi {
+	constructor (petName) {
+		this.name = petName;
+		this.hunger = 1;
+		this.sleepiness = 1;
+		this.boredom = 1;
+		this.age = 0;
+	}
+}
+// const game = {
+// }
+
+
 // Instatiate your Tomagotchi
+let pet = new tomagotchi('Charlie');
+
+
+
 // Display a character of your choice on the screen to represent your pet
 // Display the following metrics for your pet:
 // Hunger (1-10 scale)
@@ -26,15 +47,3 @@
 // ...with special powers (extend the class)!
 // Add an excercise() method to your tomagotchi, that affects certain properties
 // Add anything you can think of... use your imagination!
-
-class tomagotchi
-const game = {
-	pet: {
-		name: '',
-		hunger,
-		sleepiness,
-		boredom,
-		age: 0,
-
-	}
-}
