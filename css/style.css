@@ -1,0 +1,30 @@
+body {
+	background-color: lightyellow;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+body div {
+	display: flex;
+}
+
+#stats {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	width: 95%;
+
+}
+
+.stats {
+	width: 33%;
+	height: 50px;
+	border: 2px solid black;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}

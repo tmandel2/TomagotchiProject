@@ -17,6 +17,7 @@ class tomagotchi {
 		this.sleepiness = 1;
 		this.boredom = 1;
 		this.age = 0;
+		$('h1').text(`${petName}`);
 	}
 }
 // const game = {
@@ -29,11 +30,19 @@ let pet = new tomagotchi('Charlie');
 
 
 // Display a character of your choice on the screen to represent your pet
+
+$('#pet').append('<img src="images/dog.png"/>');
+
 // Display the following metrics for your pet:
 // Hunger (1-10 scale)
 // Sleepiness (1-10 scale)
 // Boredom (1-10 scale)
 // Age
+
+$('#hunger').text(`My hunger is ${pet.hunger} out of 10`);
+$('#sleepiness').text(`My sleepiness is ${pet.sleepiness} out of 10`);
+$('#boredom').text(`My boredom is ${pet.boredom} out of 10`);
+
 // Add buttons to the screen to feed your pet, turn off the lights, and play with your pet.
 // Add the ability to name your pet.
 // Style the page.
