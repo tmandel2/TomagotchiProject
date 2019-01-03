@@ -35,11 +35,45 @@ body div {
 	margin-right: 3px;
 }
 
+#action-display {
+	visibility: hidden;
+	height: 50px;
+	border: 2px dashed black;
+	width: 75%;
+	font-size: 30px;
+	justify-content: center;
+	align-items: center;
+}
+
+.stats {
+	background-color: pink;
+}
+
+.actions {
+	border-radius: 50px;
+}
+
+#feed {
+	background-color: brown;
+}
+
+#lights {
+	background-color: yellow;
+}
+
+#play {
+	background-color: green;
+}
+
+#workOut {
+	background-color: teal;
+}
+
 #pet img {
 	height: 250px;
 }
 
-h1 {
+h1, form {
 	width: 100%;
 	text-align: center;
 	font-size: 60px;
@@ -47,15 +81,19 @@ h1 {
 
 input {
 	height: 100px;
-	width: 45%;
+/*	width: 45%;*/
 	text-align: center;
 	font-size: 60px;
 }
 
-#petName {
+#petName, #petName2 {
 	border: 2px solid blue;
+	background-color: lightyellow;
+	width: 45%;
 }
 
-#petSubmit {
-	background-color: skyblue;
+#petSubmit, #petSubmit2 {
+	background-color: lightyellow;
+	border: 2px solid green;
+	width: 45%;
 }

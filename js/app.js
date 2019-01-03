@@ -62,6 +62,8 @@ class Tomagotchi {
 		this.sleepiness = 1;
 		this.boredom = 1;
 		this.age = 0;
+		//sitck dog current phot
+		this.currentPhoto = "images/SFPET-1.gif";
 		$('h1').text(`Your Loyal Pet: ${this.name}`);
 	}
 	getHungry () {
@@ -75,6 +77,41 @@ class Tomagotchi {
 	}
 	getOld () {
 		this.age++;
+		if (this.age === 5) {
+			this.currentPhoto = "images/dog.png";
+			// if (game.lights === 1) {
+			// 	$('#pet img').attr("src", this.currentPhoto);
+			// 	this.fadeAppearance();
+			// }
+		}
+		if (this.age === 10) {
+			this.currentPhoto = "images/olderdog.png";
+			// if (game.lights === 1) {
+			// 	// $('#pet img').attr("src","images/olderdog.png");
+			// 	this.fadeAppearance();
+			// }
+		}
+		if (this.age === 20) {
+			this.currentPhoto = "images/olderstill.jpg";
+			// if (game.lights === 1) {
+			// 	$('#pet img').attr("src","images/olderstill.jpg");
+			// 	this.fadeAppearance();
+			// }
+		}
+		if (this.age === 30) {
+			this.currentPhoto = "images/dogphoto.jpg";
+			// if (game.lights === 1) {
+			// 	$('#pet img').attr("src","images/dogphoto.jpg");
+			// 	this.fadeAppearance();
+			// }
+		}
+		if (this.age === 40) {
+			this.currentPhoto = "images/max2.jpg";
+			// if (game.lights === 1) {
+			// 	$('#pet img').attr("src","images/max2.jpg");
+			// 	this.fadeAppearance();
+			// }
+		}
 	}
 	getRested () {
 		if (this.sleepiness > 1) {
@@ -95,9 +132,9 @@ class Tomagotchi {
 		}
 	}
 	die () {
-		$('#pet img').attr("src","images/dead-cow.jpg");
 		$('h1').text('YOU DIED!!!');
 		clearInterval(game.secondsIncrease);
+		$('#pet img').attr("src","images/dead-cow.jpg");
 		$('button').hide();
 		$('#pet img').velocity({
 			height: "1000px",
@@ -107,59 +144,38 @@ class Tomagotchi {
 		$('body').css('background-color', 'darkred');
 		window.setTimeout(function() {game.reloadBoard()}, 5000);
 	}
-	changeLook () {
-		if (this.age === 5) {
-			game.currentPhoto = "images/dog.png";
-			if (game.lights === 1) {
-				$('#pet img').attr("src","images/dog.png");
-				this.fadeAppearance();
-			}
-		}
-		if (this.age === 10) {
-			game.currentPhoto = "images/olderdog.png";
-			if (game.lights === 1) {
-				$('#pet img').attr("src","images/olderdog.png");
-				this.fadeAppearance();
-			}
-		}
-		if (this.age === 20) {
-			game.currentPhoto = "images/olderstill.jpg";
-			if (game.lights === 1) {
-				$('#pet img').attr("src","images/olderstill.jpg");
-				this.fadeAppearance();
-			}
-		}
-		if (this.age === 30) {
-			game.currentPhoto = "images/dogphoto.jpg";
-			if (game.lights === 1) {
-				$('#pet img').attr("src","images/dogphoto.jpg");
-				this.fadeAppearance();
-			}
-		}
-		if (this.age === 40) {
-			game.currentPhoto = "images/max2.jpg";
-			if (game.lights === 1) {
-				$('#pet img').attr("src","images/max2.jpg");
-				this.fadeAppearance();
-			}
-		}
+	goodDeath () {
+		$('#pet img').attr("src","images/angelcat.jpg");
+		$('h1').text('You lived to a ripe old age');
+		clearInterval(game.secondsIncrease);
+		// $('.actions').hide();
+		$('body').css('background-color', 'white');
+		$('#pet img').velocity({
+			height: "1000px",
+		}, {
+			duration: 1500,
+		});
+		$('#pet img').velocity({
+			height: "0px",
+		}, {
+			duration: 1500,
+		});
+		window.setTimeout(game.resetGoodBoard, 5000);
 	}
 	workOut () {
-		this.getHungry();
-		this.getHungry();
-		this.getSleepy();
-		this.getSleepy();
-		this.getPlay();
-		this.getPlay();
-		this.getPlay();
-		this.getPlay();
+		for (let i = 1; i <= 4; i++) {
+			this.getPlay();
+			if (i % 2 === 0) {
+				this.getHungry();
+				this.getSleepy();
+			}
+		}
 		this.excited();
-
 	}
 	fadeAppearance () {
 		$('#pet img').velocity(
 			"fadeIn", {
-			duration: 1000,
+				duration: 1000,
 			}
 		)
 	}
@@ -179,6 +195,7 @@ class Tomagotchi {
 		}, {
 			duration: 10,
 		});
+		$('#action-display').text('I am a good boy');
 	}
 	eating () {
 		$('#pet img').velocity({
@@ -191,6 +208,7 @@ class Tomagotchi {
 		}, {
 			duration: 50,
 		});
+		$('#action-display').text('Yum Yum Yum!');
 	}
 	excited () {
 		$('#pet img').velocity({
@@ -211,6 +229,15 @@ class Tomagotchi {
 		}, {
 			duration: 50,
 		});
+		$('#action-display').text('What a workout!');
+	}
+	checkDeath() {
+		if (this.hunger >= 10 || this.boredom >= 10 || this.sleepiness >= 10) {
+			this.die();
+		}
+		if (this.age >= 50) {
+			this.goodDeath();
+		}
 	}
 }
 
@@ -220,6 +247,26 @@ const game = {
 	lights: 1,
 	secondsIncrease: null,
 	currentPhoto: null,
+	bonusGame: false,
+	startGame () {
+		this.pet = new Tomagotchi($('#petName').val());
+		$('.stats').css("visibility", "visible");
+		$('.actions').css("visibility", "visible");
+		$('#action-display').css("visibility", "visible");
+		$('form').css("visibility", "hidden");
+		$('form').css('height', '0px');
+		$('#pet img').attr("src", this.pet.currentPhoto);
+		$('#pet img').css("visibility", "visible");
+		$('#pet img').css('height', '250px');
+		$('#pet img').velocity(
+			"fadeIn", {
+				duration: 1000,
+			}
+		);
+		// this.currentPhoto = "images/SFPET-1.gif";
+		this.timePassing();
+		this.displayStats();
+	},
 	timePassing () {
 		this.secondsIncrease = setInterval(() => {
 			this.gameTime++;
@@ -237,8 +284,9 @@ const game = {
 			};
 			this.pet.getOld();
 			this.displayStats();
-			this.checkDeath();
-			this.pet.changeLook();
+			if (this.lights === 1) {
+				$('#pet img').attr("src", this.pet.currentPhoto);
+			}
 		}, 1000)
 	},
 	displayStats () {
@@ -246,6 +294,15 @@ const game = {
 		$('#boredom').text(`My boredom is ${this.pet.boredom} out of 10`);
 		$('#sleepiness').text(`My sleepiness is ${this.pet.sleepiness} out of 10`);
 		$('#age').text(`I am ${this.pet.age} years old!`);
+		if (this.pet.sleepiness >= 8 || this.pet.boredom >= 8 || this.pet.hunger >= 8) {
+			$('.stats').css('background-color', 'orangered');
+		} else {
+			$('.stats').css('background-color', 'pink');
+		}
+		this.pet.checkDeath();
+		if (game.bonusGame) {
+			$('body').css('background-color', `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}`);
+		}
 	},
 	takeCare (e) {
 		if ($(e.target).is('#feed') && this.lights === 1) {
@@ -265,63 +322,84 @@ const game = {
 		if ($(e.target).is('#workOut') && this.lights === 1) {
 			this.pet.workOut();
 		}
-		this.checkDeath();
+		this.pet.checkDeath();
 		this.displayStats();
 	},
 	lightsOff () {
 		this.lights = 0;
 		$('body').css('background-color', 'rgb(211, 211, 211)');
 		$('#pet img').attr("src","images/sleepingpanda.png");
+		$('#action-display').text('Good Night, Moon');
+		$('#lights').css('background-color', 'gray')
 	},
 	lightsOn () {
 		this.lights = 1;
 		$('body').css('background-color', 'lightyellow');
-		$('#pet img').attr("src", this.currentPhoto);
+		$('#pet img').attr("src", this.pet.currentPhoto);
+		$('#lights').css('background-color', 'yellow');
 		this.pet.fadeAppearance();
 	},
-	checkDeath() {
-		if (this.pet.hunger >= 10 || this.pet.boredom >= 10 || this.pet.sleepiness >= 10) {
-			this.pet.die();
-		}
-	},
-	reloadBoard() {
+	reloadBoard () {
 		location.reload();
+	},
+	resetGoodBoard () {
+    	game.bonusGame = true;
+		$('.stats').css("visibility", "hidden");
+		$('.actions').css("visibility", "hidden");
+		$('#action-display').css("visibility", "hidden");
+		$('form').css("visibility", "visible");
+		$('form').css("height", "100px");
+		$('#pet img').css("visibility", "hidden");
+		$('#petName').val('');
 	}
 }
 
 
+// function startBonusGame () {
+// 	$('.stats').css("visibility", "visible");
+// 	$('.actions').css("visibility", "visible");
+// 	$('#action-display').css("visibility", "visible");
+// 	$('#pet').append('<img src="images/SFPET-1.gif"/>');
+// 	$('#pet img').velocity(
+// 		"fadeIn", {
+// 			duration: 1000,
+// 		}
+// 	);
+// 	game.pet = new Tomagotchi($('#petName2').val());
+// 	game.currentPhoto = "images/SFPET-1.gif";
+//     game.displayStats();
+//     game.timePassing();
+// }
 
-function startGame () {
-		$('.stats').css("visibility", "visible");
-		$('.actions').css("visibility", "visible");
-		$('#pet').append('<img src="images/SFPET-1.gif"/>');
-		$('#pet img').velocity(
-			"fadeIn", {
-			duration: 1000,
-			}
-		);
-		game.pet = new Tomagotchi($('#petName').val());
-		game.currentPhoto = "images/SFPET-1.gif";
-    	game.timePassing();
-    	game.displayStats();
-}
 
 
-
-$('input').on('keypress', (e) => {
+$('#petName').on('keypress', (e) => {
     if(e.which == 13) {
     	e.preventDefault();
-    	startGame();
+    	game.startGame();
     }
 });
 
-$('#petSubmit').on('click', (e) => {
+$('#pet-form').on('submit', (e) => {
 	e.preventDefault();
-	startGame();
+	game.startGame();
 });
 
 $('button').on('click', (e) => {
 	game.takeCare(e);
 });
+
+// $('#petName2').on('keypress', (e) => {
+//     if(e.which == 13) {
+//     	e.preventDefault();
+//     	startBonusGame();
+//     }
+// });
+
+// $('#petSubmit2').on('click', (e) => {
+// 	alert("heard petSubmit2");
+// 	e.preventDefault();
+// 	startBonusGame();
+// });
 
 
