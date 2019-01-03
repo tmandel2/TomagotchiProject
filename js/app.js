@@ -62,7 +62,6 @@ class Tomagotchi {
 		this.sleepiness = 1;
 		this.boredom = 1;
 		this.age = 0;
-		//sitck dog current phot
 		this.currentPhoto = "images/SFPET-1.gif";
 		$('h1').text(`Your Loyal Pet: ${this.name}`);
 	}
@@ -79,38 +78,18 @@ class Tomagotchi {
 		this.age++;
 		if (this.age === 5) {
 			this.currentPhoto = "images/dog.png";
-			// if (game.lights === 1) {
-			// 	$('#pet img').attr("src", this.currentPhoto);
-			// 	this.fadeAppearance();
-			// }
 		}
 		if (this.age === 10) {
 			this.currentPhoto = "images/olderdog.png";
-			// if (game.lights === 1) {
-			// 	// $('#pet img').attr("src","images/olderdog.png");
-			// 	this.fadeAppearance();
-			// }
 		}
 		if (this.age === 20) {
 			this.currentPhoto = "images/olderstill.jpg";
-			// if (game.lights === 1) {
-			// 	$('#pet img').attr("src","images/olderstill.jpg");
-			// 	this.fadeAppearance();
-			// }
 		}
 		if (this.age === 30) {
 			this.currentPhoto = "images/dogphoto.jpg";
-			// if (game.lights === 1) {
-			// 	$('#pet img').attr("src","images/dogphoto.jpg");
-			// 	this.fadeAppearance();
-			// }
 		}
 		if (this.age === 40) {
 			this.currentPhoto = "images/max2.jpg";
-			// if (game.lights === 1) {
-			// 	$('#pet img').attr("src","images/max2.jpg");
-			// 	this.fadeAppearance();
-			// }
 		}
 	}
 	getRested () {
@@ -132,9 +111,9 @@ class Tomagotchi {
 		}
 	}
 	die () {
+		this.currentPhoto = "images/dead-cow.jpg";
 		$('h1').text('YOU DIED!!!');
 		clearInterval(game.secondsIncrease);
-		$('#pet img').attr("src","images/dead-cow.jpg");
 		$('button').hide();
 		$('#pet img').velocity({
 			height: "1000px",
@@ -145,10 +124,9 @@ class Tomagotchi {
 		window.setTimeout(function() {game.reloadBoard()}, 5000);
 	}
 	goodDeath () {
-		$('#pet img').attr("src","images/angelcat.jpg");
-		$('h1').text('You lived to a ripe old age');
+		this.currentPhoto = "images/angelcat.jpg";
 		clearInterval(game.secondsIncrease);
-		// $('.actions').hide();
+		$('h1').text('You lived to a ripe old age');
 		$('body').css('background-color', 'white');
 		$('#pet img').velocity({
 			height: "1000px",
@@ -304,22 +282,22 @@ const game = {
 			$('body').css('background-color', `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}`);
 		}
 	},
-	takeCare (e) {
-		if ($(e.target).is('#feed') && this.lights === 1) {
+	takeCare (pressedButton) {
+		if (pressedButton.is('#feed') && this.lights === 1) {
 			this.pet.getFed();
 		} 
-		if ($(e.target).is('#play') && this.lights === 1) {
+		if (pressedButton.is('#play') && this.lights === 1) {
 			this.pet.getPlay();
 			this.pet.wag();
 		}
-		if ($(e.target).is('#lights')) {
+		if (pressedButton.is('#lights')) {
 			if (this.lights === 1) {
 				this.lightsOff();
 			} else if (this.lights === 0) {
 				this.lightsOn();
 			}
 		}
-		if ($(e.target).is('#workOut') && this.lights === 1) {
+		if (pressedButton.is('#workOut') && this.lights === 1) {
 			this.pet.workOut();
 		}
 		this.pet.checkDeath();
@@ -386,7 +364,7 @@ $('#pet-form').on('submit', (e) => {
 });
 
 $('button').on('click', (e) => {
-	game.takeCare(e);
+	game.takeCare($(e.target));
 });
 
 // $('#petName2').on('keypress', (e) => {
