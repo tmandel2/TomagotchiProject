@@ -55,6 +55,22 @@
 // Add an excercise() method to your tomagotchi, that affects certain properties
 // Add anything you can think of... use your imagination!
 
+
+
+
+
+
+
+// 
+// 
+// CLASS ESTABLISHED
+// 
+// 
+
+
+
+
+
 class Tomagotchi {
 	constructor (petName) {
 		this.name = petName;
@@ -219,6 +235,21 @@ class Tomagotchi {
 	}
 }
 
+
+
+
+
+
+// 
+// 
+// GAME OBJECT
+// 
+// 
+
+
+
+
+
 const game = {
 	pet: null,
 	gameTime: 0,
@@ -241,7 +272,6 @@ const game = {
 				duration: 1000,
 			}
 		);
-		// this.currentPhoto = "images/SFPET-1.gif";
 		this.timePassing();
 		this.displayStats();
 	},
@@ -333,21 +363,15 @@ const game = {
 }
 
 
-// function startBonusGame () {
-// 	$('.stats').css("visibility", "visible");
-// 	$('.actions').css("visibility", "visible");
-// 	$('#action-display').css("visibility", "visible");
-// 	$('#pet').append('<img src="images/SFPET-1.gif"/>');
-// 	$('#pet img').velocity(
-// 		"fadeIn", {
-// 			duration: 1000,
-// 		}
-// 	);
-// 	game.pet = new Tomagotchi($('#petName2').val());
-// 	game.currentPhoto = "images/SFPET-1.gif";
-//     game.displayStats();
-//     game.timePassing();
-// }
+
+
+// 
+// 
+// LISTENERS
+// 
+// 
+
+
 
 
 
@@ -366,18 +390,3 @@ $('#pet-form').on('submit', (e) => {
 $('button').on('click', (e) => {
 	game.takeCare($(e.target));
 });
-
-// $('#petName2').on('keypress', (e) => {
-//     if(e.which == 13) {
-//     	e.preventDefault();
-//     	startBonusGame();
-//     }
-// });
-
-// $('#petSubmit2').on('click', (e) => {
-// 	alert("heard petSubmit2");
-// 	e.preventDefault();
-// 	startBonusGame();
-// });
-
-
