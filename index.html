@@ -4,13 +4,16 @@
 	<title>Tomagotchi</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.ui.js"></script>
 </head>
 <body>
 
 	<h1>
-		<label>Name your pet!</label>
-
-		<input type="text" id="petName"></input>
+		<form>
+			<input type="text" id="petName" placeholder="Name Your Pet!"></input>
+			<input type="Submit" id="petSubmit" name="petButton">
+		</form>
 	</h1>
 
 		<h3 id="age"></h3>
@@ -28,6 +31,7 @@
 		<button id="feed" class="actions">Feed Me!</button>
 		<button id="lights" class="actions">Lightswitch</button>
 		<button id="play" class="actions">Go Play?</button>
+		<button id="workOut" class="actions">Get a workout!</button>
 	</div>
 
 
