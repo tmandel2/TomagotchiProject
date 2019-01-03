@@ -127,9 +127,10 @@ class Tomagotchi {
 		}
 	}
 	die () {
+		clearInterval(game.secondsIncrease);
 		this.currentPhoto = "images/dead-cow.jpg";
 		$('h1').text('YOU DIED!!!');
-		clearInterval(game.secondsIncrease);
+		$('#pet img').attr("src", this.currentPhoto);
 		$('button').hide();
 		$('#pet img').velocity({
 			height: "1000px",
@@ -140,8 +141,9 @@ class Tomagotchi {
 		window.setTimeout(function() {game.reloadBoard()}, 5000);
 	}
 	goodDeath () {
-		this.currentPhoto = "images/angelcat.jpg";
 		clearInterval(game.secondsIncrease);
+		this.currentPhoto = "images/angelcat.jpg";
+		$('#pet img').attr("src", this.currentPhoto);
 		$('h1').text('You lived to a ripe old age');
 		$('body').css('background-color', 'white');
 		$('#pet img').velocity({
