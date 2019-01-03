@@ -28,6 +28,7 @@ body div {
 	justify-content: center;
 	display: flex;
 	font-size: 20px;
+	visibility: hidden;
 }
 
 #pet img {
