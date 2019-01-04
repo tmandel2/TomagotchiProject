@@ -1,59 +1,36 @@
 // Tomagotchi Mini-Project
+
 // Description
-// Let's use our front-end web development skills to create a "living" pet! We'll use HTML, CSS, and JavaScript/jQuery to interact with our pet.
+
+	// Let's use our front-end web development skills to create a "living" pet! We'll use HTML, CSS, and JavaScript/jQuery to interact with our pet.
 
 // Requirements
-// Create a repo for your tomagotchi pet
-// make a commit after you finish each one of the following
 
+	// Create a repo for your tomagotchi pet
+	// make a commit after you finish each one of the following
+	// Create a Class (JS Class, look at your notes if your forget) for your tomagotchi
+	// Instatiate your Tomagotchi
+	// Display a character of your choice on the screen to represent your pet
 
+	// Display the following metrics for your pet:
+			// Hunger (1-10 scale)
+			// Sleepiness (1-10 scale)
+			// Boredom (1-10 scale)
+			// Age
 
-// Create a Class (JS Class, look at your notes if your forget) for your tomagotchi
-
-// Instatiate your Tomagotchi
-
-
-
-
-// Display a character of your choice on the screen to represent your pet
-
-
-
-// Display the following metrics for your pet:
-// Hunger (1-10 scale)
-// Sleepiness (1-10 scale)
-// Boredom (1-10 scale)
-// Age
-
-
-
-// Add buttons to the screen to feed your pet, turn off the lights, and play with your pet.
-
-// DONE IN HTML
-
-
-// Add the ability to name your pet.
-
-// Style the page.
-// Increase your pet's age every x minutes
-
-
-
-
-// Increase your pet's Hunger, Sleepiness, and Bored metrics on an interval of your choosing.
-
-
-
-
-
-// You pet should die if Hunger, Boredom, or Sleepiness hits 10.
-// Morph your pet at certain ages.
-// Animate your pet across the screen while it's alive.
-// Extras
-// Have your tomagotchi give birth to baby tomagotchi...
-// ...with special powers (extend the class)!
-// Add an excercise() method to your tomagotchi, that affects certain properties
-// Add anything you can think of... use your imagination!
+	// Add buttons to the screen to feed your pet, turn off the lights, and play with your pet.
+	// Add the ability to name your pet.
+	// Style the page.
+	// Increase your pet's age every x minutes
+	// Increase your pet's Hunger, Sleepiness, and Bored metrics on an interval of your choosing.
+	// You pet should die if Hunger, Boredom, or Sleepiness hits 10.
+	// Morph your pet at certain ages.
+	// Animate your pet across the screen while it's alive.
+	// Extras
+	// Have your tomagotchi give birth to baby tomagotchi...
+	// ...with special powers (extend the class)!
+	// Add an excercise() method to your tomagotchi, that affects certain properties
+	// Add anything you can think of... use your imagination!
 
 
 
@@ -66,10 +43,6 @@
 // CLASS ESTABLISHED
 // 
 // 
-
-
-
-
 
 class Tomagotchi {
 	constructor (petName) {
@@ -111,8 +84,6 @@ class Tomagotchi {
 	getRested () {
 		if (this.sleepiness > 1) {
 			this.sleepiness--;
-		} else {
-			game.lightsOn();
 		}
 	}
 	getFed () {
@@ -197,20 +168,11 @@ class Tomagotchi {
 	}
 }
 
-
-
-
-
-
 // 
 // 
 // GAME OBJECT
 // 
 // 
-
-
-
-
 
 const game = {
 	pet: null,
@@ -254,6 +216,9 @@ const game = {
 			};
 			if (this.lights === 0) {
 				this.pet.getRested();
+				if (this.pet.sleepiness <= 1) {
+					this.lightsOn();
+				}
 			};
 			this.pet.getOld();
 			this.displayStats();
@@ -354,7 +319,7 @@ const game = {
 		}
 	},
 	die () {
-		clearInterval(game.secondsIncrease);
+		clearInterval(this.secondsIncrease);
 		this.pet.currentPhoto = "images/dead-cow.jpg";
 		$('h1').text(`YOUR PET DIED!!! ${this.round - 1} rounds completed`);
 		$('#pet img').attr("src", this.pet.currentPhoto);
@@ -365,7 +330,9 @@ const game = {
 			duration: 5000,
 		});
 		$('body').css('background-color', 'darkred');
-		window.setTimeout(function() {game.reloadBoard()}, 5000);
+		window.setTimeout(() => {
+			this.reloadBoard()
+		}, 5000);
 	},
 	goodDeath () {
 		clearInterval(this.secondsIncrease);
@@ -383,14 +350,16 @@ const game = {
 		}, {
 			duration: 1500,
 		});
-		window.setTimeout(game.resetGoodBoard, 5000);
+		window.setTimeout(() => {
+			this.resetGoodBoard()
+		}, 5000);
 	},
 	reloadBoard () {
 		location.reload();
 	},
 	resetGoodBoard () {
-    	game.bonusGame = true;
-    	game.round++,
+    	this.bonusGame = true;
+    	this.round++,
 		$('.stats').css("visibility", "hidden");
 		$('.actions').css("visibility", "hidden");
 		$('#action-display').css("visibility", "hidden");
@@ -401,18 +370,11 @@ const game = {
 	}
 }
 
-
-
-
 // 
 // 
 // LISTENERS
 // 
 // 
-
-
-
-
 
 $('#petName').on('keypress', (e) => {
     if(e.which == 13) {
