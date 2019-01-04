@@ -166,6 +166,13 @@ class Tomagotchi {
 		});
 		$('#action-display').text('What a workout!');
 	}
+	randomDance () {
+		$('#pet img').velocity({
+			translateX: Math.floor(Math.random() * 201 - 100),
+		}, {
+			duration: 0,
+		});
+	}
 }
 
 // 
@@ -224,7 +231,7 @@ const game = {
 			this.displayStats();
 			if (this.lights === 1) {
 				$('#pet img').attr("src", this.pet.currentPhoto);
-				this.randomDance();
+				this.pet.randomDance();
 			}
 		}, 1000/this.round)
 	},
@@ -302,13 +309,6 @@ const game = {
 			$('#pet img').attr("src","images/sleepingpanda.png");
 		}
 		return this.pause = false;
-	},
-	randomDance () {
-		$('#pet img').velocity({
-			translateX: Math.floor(Math.random() * 201 - 100),
-		}, {
-			duration: 0,
-		});
 	},
 	checkDeath() {
 		if (this.pet.hunger >= 10 || this.pet.boredom >= 10 || this.pet.sleepiness >= 10) {
