@@ -126,38 +126,6 @@ class Tomagotchi {
 			this.boredom--;
 		}
 	}
-	die () {
-		clearInterval(game.secondsIncrease);
-		this.currentPhoto = "images/dead-cow.jpg";
-		$('h1').text(`YOUR PET DIED!!! ${game.round - 1} rounds completed`);
-		$('#pet img').attr("src", this.currentPhoto);
-		$('button').hide();
-		$('#pet img').velocity({
-			height: "1000px",
-		}, {
-			duration: 5000,
-		});
-		$('body').css('background-color', 'darkred');
-		window.setTimeout(function() {game.reloadBoard()}, 5000);
-	}
-	goodDeath () {
-		clearInterval(game.secondsIncrease);
-		this.currentPhoto = "images/angelcat.jpg";
-		$('#pet img').attr("src", this.currentPhoto);
-		$('h1').text('Your pet lived to a ripe old age');
-		$('body').css('background-color', 'white');
-		$('#pet img').velocity({
-			height: "1000px",
-		}, {
-			duration: 1500,
-		});
-		$('#pet img').velocity({
-			height: "0px",
-		}, {
-			duration: 1500,
-		});
-		window.setTimeout(game.resetGoodBoard, 5000);
-	}
 	workOut () {
 		for (let i = 1; i <= 4; i++) {
 			this.getPlay();
@@ -226,14 +194,6 @@ class Tomagotchi {
 			duration: 50,
 		});
 		$('#action-display').text('What a workout!');
-	}
-	checkDeath() {
-		if (this.hunger >= 10 || this.boredom >= 10 || this.sleepiness >= 10) {
-			this.die();
-		}
-		if (this.age >= 50) {
-			this.goodDeath();
-		}
 	}
 }
 
@@ -313,7 +273,7 @@ const game = {
 		} else {
 			$('.stats').css('background-color', 'lightblue');
 		}
-		this.pet.checkDeath();
+		this.checkDeath();
 		if (this.bonusGame) {
 			$('body').css('background-color', `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}`);
 		}
@@ -342,7 +302,7 @@ const game = {
 		if (pressedButton.is('#pause') && this.pause === true) {
 			return this.unPauseGame();
 		}
-		this.pet.checkDeath();
+		this.checkDeath();
 		this.displayStats();
 	},
 	lightsOff () {
@@ -384,6 +344,46 @@ const game = {
 		}, {
 			duration: 0,
 		});
+	},
+	checkDeath() {
+		if (this.pet.hunger >= 10 || this.pet.boredom >= 10 || this.pet.sleepiness >= 10) {
+			this.die();
+		}
+		if (this.pet.age >= 50) {
+			this.goodDeath();
+		}
+	},
+	die () {
+		clearInterval(game.secondsIncrease);
+		this.pet.currentPhoto = "images/dead-cow.jpg";
+		$('h1').text(`YOUR PET DIED!!! ${this.round - 1} rounds completed`);
+		$('#pet img').attr("src", this.pet.currentPhoto);
+		$('button').hide();
+		$('#pet img').velocity({
+			height: "1000px",
+		}, {
+			duration: 5000,
+		});
+		$('body').css('background-color', 'darkred');
+		window.setTimeout(function() {game.reloadBoard()}, 5000);
+	},
+	goodDeath () {
+		clearInterval(this.secondsIncrease);
+		this.pet.currentPhoto = "images/angelcat.jpg";
+		$('#pet img').attr("src", this.pet.currentPhoto);
+		$('h1').text('Your pet lived to a ripe old age');
+		$('body').css('background-color', 'white');
+		$('#pet img').velocity({
+			height: "1000px",
+		}, {
+			duration: 1500,
+		});
+		$('#pet img').velocity({
+			height: "0px",
+		}, {
+			duration: 1500,
+		});
+		window.setTimeout(game.resetGoodBoard, 5000);
 	},
 	reloadBoard () {
 		location.reload();
