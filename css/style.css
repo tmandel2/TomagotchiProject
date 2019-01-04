@@ -73,6 +73,10 @@ h3 {
 	background-color: teal;
 }
 
+#pause {
+	background-color: white;
+}
+
 #pet img {
 	height: 250px;
 }
@@ -94,13 +98,13 @@ input {
 	font-size: 60px;
 }
 
-#petName, #petName2 {
+#petName {
 	border: 2px solid blue;
 	background-color: lightyellow;
 	width: 45%;
 }
 
-#petSubmit, #petSubmit2 {
+#petSubmit {
 	background-color: lightyellow;
 	border: 2px solid green;
 	width: 45%;

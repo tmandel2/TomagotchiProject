@@ -259,6 +259,7 @@ const game = {
 	secondsIncrease: null,
 	currentPhoto: null,
 	bonusGame: false,
+	pause: false,
 	startGame () {
 		this.pet = new Tomagotchi($('#petName').val());
 		$('.stats').css("visibility", "visible");
@@ -315,22 +316,37 @@ const game = {
 		}
 	},
 	takeCare (pressedButton) {
-		if (pressedButton.is('#feed') && this.lights === 1) {
+		if (pressedButton.is('#feed') && this.lights === 1 && this.pause === false) {
 			this.pet.getFed();
 		} 
-		if (pressedButton.is('#play') && this.lights === 1) {
+		if (pressedButton.is('#play') && this.lights === 1 && this.pause === false) {
 			this.pet.getPlay();
 			this.pet.wag();
 		}
-		if (pressedButton.is('#lights')) {
+		if (pressedButton.is('#lights') && this.pause === false) {
 			if (this.lights === 1) {
 				this.lightsOff();
 			} else if (this.lights === 0) {
 				this.lightsOn();
 			}
 		}
-		if (pressedButton.is('#workOut') && this.lights === 1) {
+		if (pressedButton.is('#workOut') && this.lights === 1 && this.pause === false) {
 			this.pet.workOut();
+		}
+		if (pressedButton.is('#pause') && this.pause === false) {
+			clearInterval(this.secondsIncrease);
+			$('#pet img').attr("src", "images/pausebutton.png");
+			return this.pause = true;
+		}
+		if (pressedButton.is('#pause') && this.pause === true) {
+			this.timePassing();
+			if (this.lights === 1) {
+				$('#pet img').attr("src", this.pet.currentPhoto);
+			}
+			if (this.lights === 0) {
+				$('#pet img').attr("src","images/sleepingpanda.png");
+			}
+			return this.pause = false;
 		}
 		this.pet.checkDeath();
 		this.displayStats();
