@@ -314,7 +314,7 @@ const game = {
 		if (this.pet.hunger >= 10 || this.pet.boredom >= 10 || this.pet.sleepiness >= 10) {
 			this.die();
 		}
-		if (this.pet.age >= 50) {
+		if (this.pet.age === 50) {
 			this.goodDeath();
 		}
 	},
