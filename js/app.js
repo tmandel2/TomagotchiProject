@@ -309,7 +309,7 @@ const game = {
 		if (this.pet.sleepiness >= 8 || this.pet.boredom >= 8 || this.pet.hunger >= 8) {
 			$('.stats').css('background-color', 'orangered');
 		} else {
-			$('.stats').css('background-color', 'pink');
+			$('.stats').css('background-color', 'lightblue');
 		}
 		this.pet.checkDeath();
 		if (this.bonusGame) {
