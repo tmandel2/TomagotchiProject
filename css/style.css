@@ -84,6 +84,7 @@ p {
 
 #pet img {
 	height: 250px;
+	visibility: hidden;
 }
 
 h1, form {
