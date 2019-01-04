@@ -263,6 +263,7 @@ const game = {
 	round: 1,
 	startGame () {
 		this.pet = new Tomagotchi($('#petName').val());
+		$('#instructions').remove();
 		$('.stats').css("visibility", "visible");
 		$('.actions').css("visibility", "visible");
 		$('#action-display').css("visibility", "visible");
