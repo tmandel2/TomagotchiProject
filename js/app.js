@@ -334,23 +334,10 @@ const game = {
 			this.pet.workOut();
 		}
 		if (pressedButton.is('#pause') && this.pause === false) {
-			clearInterval(this.secondsIncrease);
-			$('#pause').css("background-color", "black");
-			$('#pause').css("color", "white");
-			$('#pet img').attr("src", "images/pausebutton.png");
-			return this.pause = true;
+			return game.pauseGame();
 		}
 		if (pressedButton.is('#pause') && this.pause === true) {
-			this.timePassing();
-			$('#pause').css("background-color", "white");
-			$('#pause').css("color", "black");
-			if (this.lights === 1) {
-				$('#pet img').attr("src", this.pet.currentPhoto);
-			}
-			if (this.lights === 0) {
-				$('#pet img').attr("src","images/sleepingpanda.png");
-			}
-			return this.pause = false;
+			return game.unPauseGame();
 		}
 		this.pet.checkDeath();
 		this.displayStats();
@@ -368,6 +355,25 @@ const game = {
 		$('#pet img').attr("src", this.pet.currentPhoto);
 		$('#lights').css('background-color', 'yellow');
 		this.pet.fadeAppearance();
+	},
+	pauseGame () {
+		clearInterval(this.secondsIncrease);
+		$('#pause').css("background-color", "black");
+		$('#pause').css("color", "white");
+		$('#pet img').attr("src", "images/pausebutton.png");
+		return this.pause = true;
+	},
+	unPauseGame () {
+		this.timePassing();
+		$('#pause').css("background-color", "white");
+		$('#pause').css("color", "black");
+		if (this.lights === 1) {
+			$('#pet img').attr("src", this.pet.currentPhoto);
+		}
+		if (this.lights === 0) {
+			$('#pet img').attr("src","images/sleepingpanda.png");
+		}
+		return this.pause = false;
 	},
 	reloadBoard () {
 		location.reload();
