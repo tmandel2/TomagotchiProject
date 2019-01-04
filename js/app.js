@@ -335,11 +335,15 @@ const game = {
 		}
 		if (pressedButton.is('#pause') && this.pause === false) {
 			clearInterval(this.secondsIncrease);
+			$('#pause').css("background-color", "black");
+			$('#pause').css("color", "white");
 			$('#pet img').attr("src", "images/pausebutton.png");
 			return this.pause = true;
 		}
 		if (pressedButton.is('#pause') && this.pause === true) {
 			this.timePassing();
+			$('#pause').css("background-color", "white");
+			$('#pause').css("color", "black");
 			if (this.lights === 1) {
 				$('#pet img').attr("src", this.pet.currentPhoto);
 			}
