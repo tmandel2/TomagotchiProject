@@ -129,7 +129,7 @@ class Tomagotchi {
 	die () {
 		clearInterval(game.secondsIncrease);
 		this.currentPhoto = "images/dead-cow.jpg";
-		$('h1').text(`YOU DIED!!! ${game.round - 1} rounds completed`);
+		$('h1').text(`YOUR PET DIED!!! ${game.round - 1} rounds completed`);
 		$('#pet img').attr("src", this.currentPhoto);
 		$('button').hide();
 		$('#pet img').velocity({
@@ -144,7 +144,7 @@ class Tomagotchi {
 		clearInterval(game.secondsIncrease);
 		this.currentPhoto = "images/angelcat.jpg";
 		$('#pet img').attr("src", this.currentPhoto);
-		$('h1').text('You lived to a ripe old age');
+		$('h1').text('Your pet lived to a ripe old age');
 		$('body').css('background-color', 'white');
 		$('#pet img').velocity({
 			height: "1000px",
@@ -346,7 +346,7 @@ const game = {
 	},
 	lightsOff () {
 		this.lights = 0;
-		$('body').css('background-color', 'rgb(211, 211, 211)');
+		$('body').css('background-color', 'lightgray');
 		$('#pet img').attr("src","images/sleepingpanda.png");
 		$('#action-display').text('Good Night, Moon');
 		$('#lights').css('background-color', 'gray')
