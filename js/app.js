@@ -260,6 +260,7 @@ const game = {
 	currentPhoto: null,
 	bonusGame: false,
 	pause: false,
+	round: 1,
 	startGame () {
 		this.pet = new Tomagotchi($('#petName').val());
 		$('.stats').css("visibility", "visible");
@@ -299,7 +300,7 @@ const game = {
 				$('#pet img').attr("src", this.pet.currentPhoto);
 				this.randomDance();
 			}
-		}, 1000)
+		}, 1000/this.round)
 	},
 	displayStats () {
 		$('#hunger').text(`My hunger is ${this.pet.hunger} out of 10`);
@@ -388,6 +389,7 @@ const game = {
 	},
 	resetGoodBoard () {
     	game.bonusGame = true;
+    	game.round++,
 		$('.stats').css("visibility", "hidden");
 		$('.actions').css("visibility", "hidden");
 		$('#action-display').css("visibility", "hidden");
