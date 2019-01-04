@@ -288,6 +288,7 @@ const game = {
 		this.lights = 1;
 		$('body').css('background-color', 'lightyellow');
 		$('#pet img').attr("src", this.pet.currentPhoto);
+		$('#action-display').text('I\'m awake!!!');
 		$('#lights').css('background-color', 'yellow');
 		this.pet.fadeAppearance();
 	},
@@ -324,6 +325,7 @@ const game = {
 		$('h1').text(`YOUR PET DIED!!! ${this.round - 1} rounds completed`);
 		$('#pet img').attr("src", this.pet.currentPhoto);
 		$('button').hide();
+		$('#action-display').css("visibility", "hidden");
 		$('#pet img').velocity({
 			height: "1000px",
 		}, {
@@ -336,6 +338,8 @@ const game = {
 	},
 	goodDeath () {
 		clearInterval(this.secondsIncrease);
+		$('.actions').css('visibility', 'hidden');
+		$('#action-display').css("visibility", "hidden");
 		this.pet.currentPhoto = "images/angelcat.jpg";
 		$('#pet img').attr("src", this.pet.currentPhoto);
 		$('h1').text('Your pet lived to a ripe old age');
@@ -361,8 +365,6 @@ const game = {
     	this.bonusGame = true;
     	this.round++,
 		$('.stats').css("visibility", "hidden");
-		$('.actions').css("visibility", "hidden");
-		$('#action-display').css("visibility", "hidden");
 		$('form').css("visibility", "visible");
 		$('form').css("height", "100px");
 		$('#pet img').css("visibility", "hidden");
