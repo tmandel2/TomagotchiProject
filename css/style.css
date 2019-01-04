@@ -1,6 +1,6 @@
 body {
 	background-color: lightyellow;
-	height: calc(100%);
+	height: 100vh;
 	width: calc(100%);
 	display: flex;
 	flex-direction: column;
