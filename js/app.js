@@ -129,7 +129,7 @@ class Tomagotchi {
 	die () {
 		clearInterval(game.secondsIncrease);
 		this.currentPhoto = "images/dead-cow.jpg";
-		$('h1').text('YOU DIED!!!');
+		$('h1').text(`YOU DIED!!! ${game.round - 1} rounds completed`);
 		$('#pet img').attr("src", this.currentPhoto);
 		$('button').hide();
 		$('#pet img').velocity({
