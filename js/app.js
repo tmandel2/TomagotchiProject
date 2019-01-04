@@ -297,6 +297,7 @@ const game = {
 			this.displayStats();
 			if (this.lights === 1) {
 				$('#pet img').attr("src", this.pet.currentPhoto);
+				this.randomDance();
 			}
 		}, 1000)
 	},
@@ -311,7 +312,7 @@ const game = {
 			$('.stats').css('background-color', 'pink');
 		}
 		this.pet.checkDeath();
-		if (game.bonusGame) {
+		if (this.bonusGame) {
 			$('body').css('background-color', `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}`);
 		}
 	},
@@ -334,10 +335,10 @@ const game = {
 			this.pet.workOut();
 		}
 		if (pressedButton.is('#pause') && this.pause === false) {
-			return game.pauseGame();
+			return this.pauseGame();
 		}
 		if (pressedButton.is('#pause') && this.pause === true) {
-			return game.unPauseGame();
+			return this.unPauseGame();
 		}
 		this.pet.checkDeath();
 		this.displayStats();
@@ -374,6 +375,13 @@ const game = {
 			$('#pet img').attr("src","images/sleepingpanda.png");
 		}
 		return this.pause = false;
+	},
+	randomDance () {
+		$('#pet img').velocity({
+			translateX: Math.floor(Math.random() * 201 - 100),
+		}, {
+			duration: 0,
+		});
 	},
 	reloadBoard () {
 		location.reload();
