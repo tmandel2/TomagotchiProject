@@ -233,7 +233,7 @@ const game = {
 				$('#pet img').attr("src", this.pet.currentPhoto);
 				this.pet.randomDance();
 			}
-		}, 1000/this.round)
+		}, 2000/this.round)
 	},
 	displayStats () {
 		$('#hunger').text(`My hunger is ${this.pet.hunger} out of 10`);
